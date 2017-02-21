@@ -1,7 +1,25 @@
 **OutputStream API**
 
-1. write(int): void
-2. write(byte[]): void
-3. write(byte[], int, int): void
+该抽象类是所有用于表示字节输出流的超类，一个输出流接受输出字节并将他们传送到`sink`。
+
+1. write(int b): void
+    * 该方法将指定的`byte`写入输出流。
+    * 该方法的契约是：一个字节被写入到输出流。写入的字节为参数`b`的低八位，,该整型高24位被忽略。
+    * 该类的子类必须提供该方法的实现。
+    * 当输出流已经被关闭的时候，调用该方法会抛出`IOException`。
+2. write(byte[] b): void
+    * 将字节数组`b`中的`b.length`个字节写入输出流中。
+    * 该方法的契约是：它的作用应该与`write(b, 0, b.length)`的作用准确一致。
+3. write(byte[] b, int off, int len): void
+    * 该方法从指定字节数组`b`的偏移位置为`off`的位置开始向输出流中写入`len`个字节。
+    * 该方法的契约是：1)数组中的一些字节被**有序**的写入输出流中，2)元素`b[off]`是第一个被写入的，3)元素`b[off+len-1]`是最后一个被写入。
+    * 该方法实际上只是循环调用`write(int)`方法。
+    * 如果`b`为`null`，则抛出`NullPointerException`
+    * 如果`off, len`中任意一个为负数，或者`off + len`大于数组`b`的长度,则会抛出`IndexOutOfBoundsException`。
 4. flush(): void
+    * 该方法会刷新输出流，并强制将所有缓存的输出字节输出。
+    * 该方法的契约是：调用该方法是一个指定*indication*,如果之前写入的字节有被输出流缓存,那么这些字节会被**立即**写到其目的地*intended destination*。
+    * 如果该输出流的目的地是操作系统提供的抽象，如文件，那么`flushing`只保证之前写入到该输出流中的字节被传递到操作系统中,它不保证实际写入物理设备。
 5. close(): void
+    * 该方法关闭输出流，并释放与该输出流管理的所有系统资源。
+    * 一个被关闭的输出流不能执行输出操作，也不能被重新打开。

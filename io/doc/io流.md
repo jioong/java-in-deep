@@ -10,5 +10,7 @@
 但是，因为面向字节的流不便于处理以`Unicode`形式储存的信息，所以从抽象类`Reader, Writer`中继承出一个专门用于处理`Unicode`字符的单独的类层次结构。
 这些类拥有的读入和写出操作**都是基于两字节的Unicode码元的，而不是基于单字节的字符。**
 
-1. [java.io.InputStream](./details/input-stream.md)
-    
+1. [java.io.InputStream](./details/input-stream.md)  
+2. [java.io.OutputStream](./details.output-stream.md)  
+这两个类中的`read(), write`方法在执行时都将**阻塞**，直至字节确实被读入或写出，这就意味着如果流不能被立即访问，那么**当前的线程将被阻塞**。这使得
+在这两个方法等待指定的流变为可用的这段时间里，**其他的线程**就有机会去执行有用的工作。
