@@ -1,4 +1,4 @@
-**Reader API**
+# Reader API
 
 该抽象类用于读取**字符流**,该类的子类必须实现的方法是`read(char[], int, int), close()`。
 

@@ -1,4 +1,4 @@
-**InputStream API**
+# InputStream API
 
 1. read(): int  
     * 该方法从输入流中读取下一个 byte  

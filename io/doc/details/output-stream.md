@@ -1,4 +1,4 @@
-**OutputStream API**
+# OutputStream API
 
 该抽象类是所有用于表示字节输出流的超类，一个输出流接受输出字节并将他们传送到`sink`。
 
