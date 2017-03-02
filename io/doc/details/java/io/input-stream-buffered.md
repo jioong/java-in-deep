@@ -18,3 +18,16 @@
     * 如果`markPos != -1`，则`buf[markPos] - buf[pos - 1]`之间的元素必须保存在`buf`数组中。它们可能会被移到另外一个数组中,并调整`count, pos, markPos`的值.
         它们不会丢弃，除非`pos - markPos`的差值大于`marklimit`。
 7. `marklimit` 当`pos - markPos > marklimit`时，设置的标记会被丢弃并且`markPos` 会被设置为 -1。
+
+## 构造器
+
+1. `BufferedInputStream(InputStream in)`
+    * 该构造器使用默认缓存大小作为缓存数组的大小。
+2. `BufferedInputStream(InputStream in, int size)`
+    * 参数`size`指定缓存数组的大小。
+    
+## 方法
+
+1. synchronized read(): void
+    * 该方法是一个同步方法。它会从缓存数组中读取字符，当`pos >= count`时，也就是，读取到缓存数组的最后一位后调用`fill()`方法填充缓存数组。
+    * 调用`fill()`方法后，如果`pos >= count`，说明已经读到输入流的末尾，返回 -1。
