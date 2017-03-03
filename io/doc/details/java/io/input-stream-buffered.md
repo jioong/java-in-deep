@@ -31,3 +31,5 @@
 1. synchronized read(): void
     * 该方法是一个同步方法。它会从缓存数组中读取字符，当`pos >= count`时，也就是，读取到缓存数组的最后一位后调用`fill()`方法填充缓存数组。
     * 调用`fill()`方法后，如果`pos >= count`，说明已经读到输入流的末尾，返回 -1。
+2. synchronized read(byte[] b, int off, int len): void
+    * 该方法从字节输入流中读取字符，并写入数组`b`中，开始索引位置为`off`
