@@ -10,6 +10,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>osgi</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>osgi-helloworld</module>
+    </modules>
 
 
 </project>
