@@ -24,3 +24,9 @@
 ## XML 配置
 
 1. 使用XML启用自动扫描，可以使用`spring context`命名空间的`<context:component-scan>`元素。
+
+### spring-bean 模式
+
+包含在该模式下的元素:
+1. `<beans>`
+2. `<bean>`, 类似于`@Bean`注解，通过`class`属性来指定要创建的`bean`的类，需要使用**全限定的类名。**

@@ -62,3 +62,27 @@ Spring应用上下文中所有的`bean`都会给定一个`ID`。当没有明确�
 ### 2.3 借助JavaConfig实现注入
 
 在`JavaConfig`中装配`bean`的最简单的方式就是引用创建`bean`的方法。
+
+## 3. 通过XML装配bean
+
+### 3.1 创建XML配置规范
+
+在XML配置中，要以`<beans>`元素为根。如
+```XML
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+       
+       <!-- configuration details go here -->
+</beans>
+```
+
+借助*Spring Tool Suite*创建XML配置文件。
+
+### 3.2 借助构造器注入初始化bean
+
+在XML中声明DI时，针对构造器注入由两种基本的配置方法可供选择：
+* `<constructor-arg>`元素
+* 使用`Spring 3.0`时引入的*c-命名空间*
