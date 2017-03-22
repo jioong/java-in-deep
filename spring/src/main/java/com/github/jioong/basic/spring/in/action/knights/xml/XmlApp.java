@@ -16,7 +16,7 @@ public class XmlApp {
          */
         ApplicationContext context = new ClassPathXmlApplicationContext("META-INF/spring/xml-wiring.xml");
 
-        Knight knight = (SlayKnight) context.getBean("knight");
+        Knight knight = (Knight)context.getBean("knight");
         knight.embarkOnQUest();
     }
 }

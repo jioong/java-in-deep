@@ -51,3 +51,44 @@ AOP能确保POJO的简单性。AOP能够使这些服务模块化，并以声明�
 关注自身业务，完全不需要了解设计系统服务所带来的复杂性。
 
 借助AOP，可以使用各功能层去包裹核心业务层。功能层以声明的方式灵活地应用到系统中。
+
+> 在基于Spring的应用中，应用对象生存于**Spring 容器(Container)**中。SPring容器负责创建对象、装配它们，配置它们并管理它们的整个生命周期。
+
+容器是Spring的核心。Spring容器使用`DI`管理构成应用的组件，它会创建相互协作的组件之间的关联。
+Spring自带多个容器的实现，可以归纳为两种不同的类型：
+1. `bean`工厂，由`org.springframework.beans.factory.BeanFactory`接口定义，是最简单的容器，提供基本的`DI`操作。
+2. 应用上下文，由`org.springframework.context.ApplicationContext`接口定义，基于`BeanFactory`构建，并提供应用框架级别的服务。
+
+### 应用上下文
+
+Ｓpring自带多种类型的应用上下文：
+* `AnnotationConfigApplicationContext`,从一个或多个基于`Java`的配置类中加载`Spring`应用上下文。
+* `AnnotationConfigWebApplicationContext`，从一个或多个基于`Java`的配置类中加载`Spring Web`应用上下文。
+* `ClassPathXmlApplicationContext`,从类路径下的一个或多个`XML`配置文件中加载上下文，把应用上下文的定义文件作为**类资源**。这些配置文件的根目录
+为`resources`，与`main。java`平级的目录。**在所有类路径下查找配置文件**
+* `FileSystemXmlApplicationContext`，从文件系统下的一个或多个`XML`配置文件中加载上下文定义。
+* `XmlWebApplicationContext`,从`Web`应用下的一个或多个`Xml`配置文件中加载上下文定义。
+
+### bean的生命周期
+
+1. `Spring`对`bean`进行实例化。
+2. `Spring`将值和对`bean`的引用注入到`bean`对应的属性中。
+3. 如果`bean`实现了`BeanNameAware`接口，Ｓpring将`bean`的`ID`传递给`setBeanName()`方法。
+4. 如果`bean`实现了`BeanFactoryAware`接口，Ｓpring将调用`setBeanFactory()`方法，将`BeanFactory`容器实例传入。
+5. 如果`bean`实现了`ApplicationContextAware`接口，Ｓpring将调用`setＡpplicationContext()`方法，将`bean`所在的应用上下文的引用传入进来。
+6. 如果`bean`实现了`BeanPostProcessor`接口，Spring将调用它的`postProcessBeforeInitialization()`方法。
+7. 如果`bean`实现了`InitializingBean`接口，Spring将调用它的`afterPropertiesSet()`方法。类似的，如果`bean`使用`init-method`声明了初始化方法，该方法也会被调用。
+8. 如果`bean`实现了`BeanPostProcessor`接口，Spring将调用它的`postProcessAafterInitialization()`方法。
+9. 此时，`bean`就已经准备就绪了，可以被应用程序使用。它们将**一直驻留在应用上下文中，**直到该应用上下文被销毁。
+10. 如果`bean`实现了`DisposableBean`接口，Spring将调用它的`destroy()`方法。同理地，如果`bean`使用`destroy-method`声明了销毁方法，该方法也会被调用。
+
+
+## Spring 模块
+
+Spring按功能可以划分为6类不同的功能：
+* Spring核心容器。
+* Spring AOP 模块。
+* 数据访问与集成。
+* Web 与远程调用。
+* Instrumentation。
+* 测试。
