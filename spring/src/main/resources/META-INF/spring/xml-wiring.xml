@@ -19,6 +19,11 @@
         <constructor-arg value="#{T(System).out}" />
     </bean>
 
+    <bean id="compactDisc" class="com.github.jioong.basic.spring.in.action.CD.impl.BlankDisc">
+        <constructor-arg value="Sgt. Pepper's  Lonely Hearts Club Band" />
+        <constructor-arg value="The Beatles" />
+    </bean>
+
 
     <aop:config>
         <aop:aspect ref="minstrel">

@@ -86,3 +86,99 @@ Spring应用上下文中所有的`bean`都会给定一个`ID`。当没有明确�
 在XML中声明DI时，针对构造器注入由两种基本的配置方法可供选择：
 * `<constructor-arg>`元素
 * 使用`Spring 3.0`时引入的*c-命名空间*
+
+**构造器注入bean引用**
+
+当`Spring`遇到`<bean>`元素时，它会创建一个对象实例。`<constructor-arg>`元素会告知Spring要将一个`ID`为`ref`属性指定的`bean`的引用传入该`bean`。
+
+作为`<constructor-arg>`的替代方案，可以使用`c-命名空间`，它是在XML更为简洁地描述构造器参数的方式。要使用它的话，必须在XML的顶部声明其模式:
+```XML
+    xmlns:c="http://www.springframework.org/schema/c"
+    
+    <bean id="CDPlayer" class="com.github.jioong.basic.spring.in.action.CD.impl.CDPlayer">
+        <constructor-arg ref="compactDisc" />
+    </bean>
+```
+
+在`c-命名空间`和模式声明之后，就可以使用它来声明构造器参数了。如
+```XML
+<bean id="CDPlayer" class="com.github.jioong.basic.spring.in.action.CD.impl.CDPlayer" c:cd-re="compactDisc" />
+```
+它与上面的`<constructor-arg>`注入等效。
+
+`c-命名空间`作为`bean`元素的一个属性。该属性名的组成规则如下：
+* 属性名为`c:`开头，也就是此命名空间的前缀。
+* 接下来，是要装配的构造器参数名。
+* 之后的，`-ref`则是一个命名约定。它告诉Spring,正在装配的是一个`bean`的引用。
+* 该属性的值则是要注入的`bean`的`ID`。
+
+上面的方式直接使用了构造器参数名称，可能是优化问题导致无法正常执行。替代方案是，**使用参数在整个参数列表中的位置信息:**
+```XML
+<bean id="CDPlayer" class="com.github.jioong.basic.spring.in.action.CD.impl.CDPlayer" c:_0-re="compactDisc" />
+```
+
+这里**将参数的名称替换成了参数的索引**。因为在XML中不允许数字作为属性的第一个字符，所以必须添加一个下划线作为前缀。
+
+
+**将字面量注入到构造器中**
+
+使用`<constructor-arg>`的`value`属性，通过该属性表明给定的值要以字面量的形式注入到构造器之中。
+
+同样的，注入字面量值也可以使用`c-命名空间`:
+```XML
+<bean id="beanName" class="path.to.class" c:_argName1="要传入的值" c:_argName2="要传入的值" />
+```
+可以看到，装配字面量与装配引用的区别在于**属性名中去掉了 -ref 后缀。**与之前类似，也可以使用参数索引装配字面量值。
+```XML
+<bean id="beanName" class="path.to.class" c:_0="要传入的值" c:_1="要传入的值" />
+```
+
+> XML 中不允许某个元素的多个属性具有相同的名字。
+
+**装配集合**
+
+这种情况，`<constructor-arg>`能实现，但是`c-命名空间`无法做到。
+
+`<constructor-arg><null/></constructor-arg>`会将`null`传递给构造器参数。
+
+要传入集合时：
+1. 可以使用`<list>`元素将其声明为一个列表，如
+```XML
+<constructor-arg>
+    <list>
+        <value>列表值1</value>
+        <value>列表值2</value>
+        <value>...</value>
+    </list>
+</constructor-arg>
+```
+
+在`<list>`中可以使用`ref`替换`value`，表明要传入的是`bean`引用列表的装配。
+
+当构造器参数类型是`List`时，使用`<list>`元素是合情合理的。也可以以同样的方式使用`<set>`元素。
+
+### 3.3 设置属性
+
+> 作为通用规则，倾向于对强烈依赖使用构造器注入，而对可选性的依赖使用属性注入。
+
+```XML
+<bean id="CDPlayer" class="com.github.jioong.basic.spring.in.action.CD.impl.CDPlayer">
+    <peoperty name="要注入的属性名" ref="该属性引用的bean的ID" />
+</bean>
+```
+
+`<property>`元素为属性的`setter`方法所提供的功能与`<constructor-arg>`元素为构造器所提供的功能是一样的。
+此外，Spring提供了与`c-命名空间`类似的`p-命名空间`来作为`<property>`元素的替代方案。为了启动`p-命名空间`必须要在XML文件中与其他的命名空间一起对其进行声明:
+```XML
+    xmlns:p="http://www.springframework.org/schema/p"
+    
+    <bean id="CDPlayer" class="com.github.jioong.basic.spring.in.action.CD.impl.CDPlayer" p:compactDisc-ref="compactDisc" />
+```
+
+`p-命名空间`中属性名约束与`c-命名空间`中的属性类似。
+* 首先，使用`p:`前缀，表明所设置的是一个属性。
+* 接下来，是要注入的属性名。
+* 最后，属性的名称以`-ref`结尾，表明要注入的是引用，而不是字面量。
+
+**将字面量注入到属性中**
+
