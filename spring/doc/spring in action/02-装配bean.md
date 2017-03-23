@@ -182,3 +182,22 @@ Spring应用上下文中所有的`bean`都会给定一个`ID`。当没有明确�
 
 **将字面量注入到属性中**
 
+## 4. 导入和混合配置
+
+关于混合配置，第一件需要知道的事情就是在自动装配时，它不在意要装配的`bean`来自哪里。
+> 自动装配的时候会考虑到Spring容器中的所有`bean`，而不管它是在`JavaConfig`中或XML中声明的，还是通过组件扫描获取到的。
+
+### 4.1 在JavaConfig中引用XML配置
+
+1. 当存在多个`JavaConfig`配置文件时，可以通过`@Inport`注解将一个配置文件导入另一个配置文件中。如在一个`JavaConfig`配置文件上使用`@Inport(CDConfig.class)`注解。
+2. 更好的一种做法是，创建一个比现有`JavaConfig`配置文件更高级别的配置文件，并在这个配置文件类中引入多个配置文件类。如`@Inport({CDPlayerConfig.class, CDConfig.class})`。
+3. 使用`@ImportResource`注解，可以将一个XML配置文件导入`JavaConfig`配置文件类中。如`@ImportResource("class-path:cd-config.xml")`。
+
+### 4.2 在XML配置中引用JavaConfig
+
+1. 在XML配置文件中，可以使用`<import>`元素来导入其他的XML配置文件 。如`<import resource="cd-config.xml" />`。该元素只能用于导入其他的XML配置文件，而不能导入`JavaConfig`配置。
+2. 将一个`JavaConfig`配置文件导入XML配置文件，需要使用`<bean>`元素。如`<bean class="path.to.JavaConfig">`。
+
+> 不管是使用JavaConfig还是使用XML进行配置，通常会创建一个根配置(root  configuration)。然后在根配置中启用组件扫描。
+
+Spring框架的核心是Spring容器。容器负责管理应用中组件的生命周期，它会创建这些组件并保证它们的依赖能够得到满足。
