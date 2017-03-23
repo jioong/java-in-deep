@@ -21,6 +21,16 @@
     * 默认情况下，Spring中的`bean`都是**单例的**。
 6. `@Import`，该注解用于**JavaConfig类**，用于将一个配置文件导入另一个配置文件。
 7. `@ImportResource`,该注解用于将一个XML配置文件导入一个`JavaConfig`配置文件中。
+8. `@Profile`,该注解指定某个`bean`属于哪一个`profile`。
+    * 如果该注解应用在**类**级别上。它告诉Spring这个配置类中的`bean`只有在指定的`profile`激活时才会创建。如果指定的`profile`没有激活，则带有`@Bean`注解的方法都会被忽略掉。
+    * 该注解从3.2开始可以使用在**方法**级别上，与`@Bean`注解一同使用。
+    * 没有指定`profile`的`bean`始终都会被创建，与激活哪个`profile`没有关系。
+9. `@Conditional`，该注解用在带有`@Bean`注解的方法上，实现条件化的`bean`。
+    * 设置给该注解的类是任意实现了`Condition`接口的类。该接口只有一个`matches()`方法
+10. `@Primary`，该注解用来标示首选`bean`。
+    * 该注解可与`@Component`注解组合用在组件扫描的`bean`上。
+    * 也可以与`@Bean`注解组合用在Java配置的`bean`声明中。
+    * 它与XML配置文件中的`<bean>`元素的`primary="true"`属性一样。
     
     
 ## XML 配置

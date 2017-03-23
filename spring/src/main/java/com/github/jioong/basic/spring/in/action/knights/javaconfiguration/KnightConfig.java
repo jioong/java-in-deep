@@ -5,6 +5,7 @@ import com.github.jioong.basic.spring.in.action.knights.Knight;
 import com.github.jioong.basic.spring.in.action.knights.Quest;
 import com.github.jioong.basic.spring.in.action.knights.xml.SlayDragonQuest;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 
 /**
