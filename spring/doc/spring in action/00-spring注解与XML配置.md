@@ -3,6 +3,7 @@
 ## 注解
 
 1. `@Component`，表明它修饰的**类**会作为组件类，并告诉Spring要为这个类创建`bean`。
+    * 所有使用该注解的类都会创建为`bean`，并且其默认`ID`为首字母变为小写的类名。
 2. `@ComponentScan`，该注解能在Ｓpring中启用组件扫描。
     * 如果没有其他配置，`@ComponentScan`默认会扫描与配置类相同的包。
     * 它会查找扫描目录下带有`@Component`注解的类，并在Ｓpring中自动为其创建`bean`。
@@ -31,6 +32,13 @@
     * 该注解可与`@Component`注解组合用在组件扫描的`bean`上。
     * 也可以与`@Bean`注解组合用在Java配置的`bean`声明中。
     * 它与XML配置文件中的`<bean>`元素的`primary="true"`属性一样。
+11. `@Qualifier`,该注解是使用限定符的主要方法。他可以与`@Autowired`和`@Inject`注解协同使用，在注入的时候指定想要注入进去的是哪个`bean`。
+    * 该注解的参数为想要注入的`bean`的`ID`。
+    * 他可以与`@Component`注解组合使用，设置自己的限定符。
+    * 通过`JavaConfig`配置显示定义`bean`的时候，该注解也可以与`@Bean`组合使用。
+12. `@Scope`，该注解指定作用域。可以与`@Component, @Bean`注解组合使用。
+    * 该注解使用`ConfigurableBeanFactory`类中的范围常量来设置作用域。
+    * 它与XML配置文件中的,`<bean>`元素的`scope`属性设置作用域等效。
     
     
 ## XML 配置
