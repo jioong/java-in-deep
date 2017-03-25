@@ -40,6 +40,8 @@
     * 该注解使用`ConfigurableBeanFactory`类中的范围常量来设置作用域。
     * 它与XML配置文件中的,`<bean>`元素的`scope`属性设置作用域等效。
     * 该注解还有一个`proxyModee`属性。该属性用于解决将会话或请求作用域的`bean`注入单例`bean`中所遇到的问题。
+13. `@Value`
+    * 它的使用方式与`@Autowired`注解非常相似。
     
     
 ## XML 配置
