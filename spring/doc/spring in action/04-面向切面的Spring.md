@@ -143,3 +143,20 @@ Spring所创建的通知都是用标准的`Java`类编写的。可以使用与�
 利用称为**引入**的概念，切面可以为`Spring bean`添加新的方法。
 
 > 当引入接口的方法被调用时，代理会把此调用委托给实现了新接口的某个其他对象。实际上，一个`bean`的实现被拆分到了多个类中。
+
+## 3. 在XML中声明切面
+
+在Spring中，注解和自动代理提供了一种便利的方式去创建切面。它只涉及少量的配置。但是它有一个劣势在于：**必须能够为通知类添加注解。也就意味着，必须要有源码。**
+
+在Spring的`aop 命名空间`中，提供了多个元素用来在XML中声明切面。如
+* `<aop:advisor>` 定义AOP通知器。
+* `<aop:after>`  定义后置通知(不管被通知的方法是否执行成功)。
+* `<aop:after-returing>` 定义AOP返回通知。
+* `<aop:after-throwing>` 定义AOP异常通知。
+* `<aop:around>` 定义AOP环绕通知。
+* `<aop:aspect>` 定义一个切面。
+* `<aop:aspectj-autoproxy>` 启动`@AspectJ`注解驱动的切面。
+* `<aop:before>` 定义AOP前置通知。
+* `<aop:config>` 顶层的AOP元素。大多数`<aop:*>`元素必须包含在该元素内。
+* `<aop:declare-parents>` 以透明的方式为被通知的对象引入额外的接口。
+* `<aop:pointcut>` 定义一个切点。
