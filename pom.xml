@@ -15,6 +15,7 @@
         <module>jms</module>
         <module>spring</module>
         <module>advanced-features</module>
+        <module>ehcache</module>
     </modules>
 
 
