@@ -15,7 +15,7 @@
     <cache-template name="myDefaults">
         <key-type>java.lang.Long</key-type>
         <value-type>java.lang.String</value-type>
-        <heap unit="entries">200</heap>
+        <heap unit="entries">200</heap>中`
     </cache-template>
 
     <cache alias="bar" uses-template="myDefaults">
