@@ -56,3 +56,6 @@
 
 1. `destroy(): void`，销毁与该管理器所关联的所有持久化数据。它会先进入`MAINTENANCE`状态，然后执行销毁，再退出`MAINTENANCE`状态。
 2. `destroyCache(String alias)`，销毁指定Cache。
+
+## PersistentUserManagedCache<K,V>接口
+
