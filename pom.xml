@@ -9,12 +9,9 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>osgi</module>
         <module>jigsaw</module>
         <module>collection</module>
-        <module>jms</module>
         <module>spring</module>
-        <module>advanced-features</module>
         <module>ehcache</module>
         <module>basic</module>
     </modules>
