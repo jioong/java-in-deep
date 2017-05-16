@@ -14,6 +14,7 @@
         <module>spring</module>
         <module>ehcache</module>
         <module>basic</module>
+        <module>jms</module>
     </modules>
 
 
