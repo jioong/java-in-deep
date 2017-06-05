@@ -5,7 +5,7 @@
 * 执行
 * 更新
 * 移除
-![生命周期](./img/life-cycle.jpg "生命周期")
+![生命周期](img/life-cycle.jpg "生命周期")
 
 * 通过在外部或者内部对应用进行这些操作，完成对应用”生命周期管理“的过程。
 * 对于非模块化应用，这些操作就是以整个应用为对象的。
@@ -17,11 +17,11 @@
 2. 对生命周期的操作，允许动态地改变运行与框架中*bundle*组成，并以此来管理和演化应用程序。
 3. 在应用程序内部，生命周期层定义了*bundle*访问其执行上下文的方式，为*bundle*提供了一种与OSGI框架交互的途径以及一些执行时的便利条件。
 
-![OSGI 生命周期](./img/life-cycle-module.jpg "OSGI 生命周期")
+![OSGI 生命周期](img/life-cycle-module.jpg "OSGI 生命周期")
 
 OSGI框架支持对*bundle*形式的JAR文件实现生命周期管理**安装、解析、启动、停止、更新和卸载**
 
-![OSGI 生命周期状态转移](./img/life-cycle-status-transate.jpg "生命周期状态转移")
+![OSGI 生命周期状态转移](img/life-cycle-status-transate.jpg "生命周期状态转移")
 
 ## 接入生命周期层
 
