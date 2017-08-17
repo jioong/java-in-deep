@@ -16,6 +16,8 @@
         <module>basic</module>
         <module>jms</module>
         <module>features</module>
+        <module>nettyinaction</module>
+        <module>designpattern</module>
     </modules>
 
 
