@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Configuration status="trace" xmlns="http://logging.apache.org/log4j/2.0/config">
+<Properties>
+<Property name="out">STDOUT</Property>
+</Properties>
+<Appenders>
+<Console name="STDOUT" target="SYSTEM_ERR">
+<PatternLayout pattern="%msg%n"/>
+</Console>
+
+</Appenders>
+<Loggers>
+<Logger name="com.github.jioong.App" level="trace" additivity="true">
+<AppenderRef ref="${out}"/>
+</Logger>
+<Root>
+<AppenderRef ref="STDOUT"/>
+</Root>
+</Loggers>
+</Configuration>
